@@ -53,7 +53,7 @@ public class SimpleList
 				arraySize *= 1.5;
 				int tempArray[] = list;
 				list = new int[arraySize];
-				for(int i = 0; i < tempArray.length; i++)
+				for(int i = 0; i < count; i++)
 				{
 					list[i] = tempArray[i];
 				}
@@ -93,13 +93,13 @@ public class SimpleList
 		}
 		
 		//Updates the array size if the count is wrong
-		double temp = (double)arraySize/(double)count;
+		double temp = (double)count/(double)arraySize;
 		if(temp <= .75)
 		{
 			arraySize *= .75;
 			int tempArray[] = list;
 			list = new int[arraySize];
-			for(int i = 0; i < tempArray.length; i++)
+			for(int i = 0; i < count; i++)
 			{
 				list[i] = tempArray[i];
 			}
@@ -192,7 +192,7 @@ public class SimpleList
 		int toReturn = -1;
 		if(count != 0)
 		{
-			toReturn = list[count];
+			toReturn = list[count - 1];
 		}
 		return toReturn;
 	}
