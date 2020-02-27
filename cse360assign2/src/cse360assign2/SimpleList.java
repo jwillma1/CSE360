@@ -23,6 +23,7 @@ public class SimpleList
 {
 	private int[] list;
 	private int count;
+	private int arraySize = 10;
 	
 	/**
 	 * Class Constructor
@@ -31,7 +32,7 @@ public class SimpleList
 	 */
 	public SimpleList()
 	{
-		list = new int[10];
+		list = new int[arraySize];
 		count = 0;
 	}
 	
@@ -47,24 +48,26 @@ public class SimpleList
 			list[0] = addInt;
 		}else
 		{
+			if (count == arraySize)
+			{
+				arraySize *= 1.5;
+				int tempArray[] = list;
+				list = new int[arraySize];
+				for(int i = 0; i < tempArray.length; i++)
+				{
+					list[i] = tempArray[i];
+				}
+			}
 			//Starts at the end of the array, moving the elements to the right
 			for(int index = count - 1; index >= 0; index--)
 			{
-				/*Condition to check if the index is not 9, the ending index,
-				then this procedure will not result in an ArrayOutOfBounds exception */
-				if(index  != 9)
-				{
-					list[index+1] = list[index];
-				}		
+				list[index+1] = list[index];
+	
 			}
 			//Adds the element to the first index
-			list[0] = addInt;
+			list[0] = addInt;	
 		}
-		//Count max is 10
-		if(count != 10)
-		{
-			count++;
-		}
+		count++;
 	}
 	
 	/**
@@ -87,6 +90,21 @@ public class SimpleList
 				}
 			}
 			count--; //Updates the count
+		}
+		
+		//Updates the array size if the count is wrong
+		double temp = (double)arraySize/(double)count;
+		if(temp <= .75)
+		{
+			arraySize *= .75;
+			int tempArray[] = list;
+			list = new int[arraySize];
+			for(int i = 0; i < tempArray.length; i++)
+			{
+				list[i] = tempArray[i];
+			}
+			
+					
 		}
 	}
 	
@@ -141,5 +159,46 @@ public class SimpleList
 			}
 		}
 		return searchIndex;
+	}
+	
+	public void append(int end)
+	{
+		if(count == arraySize)
+		{
+			arraySize *= 1.5;
+			int tempArray[] = list;
+			list = new int[arraySize];
+			for(int i = 0; i < tempArray.length; i++)
+			{
+				list[i] = tempArray[i];
+			}
+		}
+		list[count] = end;
+		count++;
+	}
+	
+	public int first()
+	{
+		int toReturn = -1;
+		if(count != 0)
+		{
+			toReturn = list[0];
+		}
+		return toReturn;
+	}
+	
+	public int last()
+	{
+		int toReturn = -1;
+		if(count != 0)
+		{
+			toReturn = list[count];
+		}
+		return toReturn;
+	}
+	
+	public int size()
+	{
+		return arraySize;
 	}
 }
