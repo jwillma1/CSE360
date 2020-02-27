@@ -48,9 +48,15 @@ public class SimpleList
 			list[0] = addInt;
 		}else
 		{
+			//Checks if the list si full
 			if (count == arraySize)
 			{
+				//New array size
 				arraySize *= 1.5;
+				
+				/* Copies the list to a temp array
+				 * and then fills the list with the new size
+				 */
 				int tempArray[] = list;
 				list = new int[arraySize];
 				for(int i = 0; i < count; i++)
@@ -67,7 +73,7 @@ public class SimpleList
 			//Adds the element to the first index
 			list[0] = addInt;	
 		}
-		count++;
+		count++; //Increases the count
 	}
 	
 	/**
@@ -94,16 +100,21 @@ public class SimpleList
 		
 		//Updates the array size if the count is wrong
 		double temp = (double)count/(double)arraySize;
+		//Checks if the list is <= 75% full
 		if(temp <= .75)
 		{
+			//Updates the array size
 			arraySize *= .75;
+			
+			/*Copies the list to a temp array
+			 * and then fills the list with the new size
+			 */
 			int tempArray[] = list;
 			list = new int[arraySize];
 			for(int i = 0; i < count; i++)
 			{
 				list[i] = tempArray[i];
 			}
-			
 					
 		}
 	}
@@ -161,11 +172,23 @@ public class SimpleList
 		return searchIndex;
 	}
 	
+	/**
+	 * Checks if the array size is full, if so, increases by
+	 * 50% and then places the input value to the last element
+	 * of the count size
+	 * @param end is the last index
+	 */
 	public void append(int end)
 	{
+		//Checks if the array is full
 		if(count == arraySize)
 		{
+			//Increases the array size
 			arraySize *= 1.5;
+			
+			/*Copies the list to a temp array
+			 * and then fills the list with the new size
+			 */
 			int tempArray[] = list;
 			list = new int[arraySize];
 			for(int i = 0; i < tempArray.length; i++)
@@ -173,32 +196,50 @@ public class SimpleList
 				list[i] = tempArray[i];
 			}
 		}
-		list[count] = end;
-		count++;
+		list[count] = end; //Places the element at the last index
+		count++; //increases the count
 	}
 	
+	/**
+	 * Finds the first element if the list is not empty
+	 * @return the first element and -1 if empty
+	 */
 	public int first()
 	{
-		int toReturn = -1;
+		int toReturn = -1; //Return value
+		
+		
+		//Checks if the list is not empty
 		if(count != 0)
 		{
-			toReturn = list[0];
+			toReturn = list[0]; //First element index
 		}
 		return toReturn;
 	}
 	
+	/**
+	 * This method finds the last element if the list is not empty
+	 * @return the last element else -1 if empty
+	 */
 	public int last()
 	{
-		int toReturn = -1;
+		int toReturn = -1; // Return value
+		
+		//Checks if the list is not empty
 		if(count != 0)
 		{
-			toReturn = list[count - 1];
+			toReturn = list[count - 1]; //Last element index
 		}
 		return toReturn;
 	}
 	
+	/** 
+	 * Returns the arraySize
+	 * @return gives the arraySize, not the amount 
+	 * of elements input by the user
+	 */
 	public int size()
 	{
-		return arraySize;
+		return arraySize; //The amount of elements possible in tthe array
 	}
 }
